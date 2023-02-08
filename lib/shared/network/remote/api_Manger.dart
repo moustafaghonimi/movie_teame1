@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:movie/core/constant.dart';
 import 'package:http/http.dart' as http;
+import 'package:movie/models/moreLikeThis.dart';
 import 'package:movie/models/topSide.dart';
 
 import '../../../models/TopReated.dart';
@@ -42,7 +43,23 @@ class ApiManger {
       throw e;
     }
   }
+Future<MoreLikeThis> getMoreLikeThise(num movie_id)async{
+    Uri URL=Uri.https(BASE,'/3/movie/${movie_id.toString()}/similar',{
+      'api_key':APIHEY,
+      // 'movie_id':Filme_ID,
+    });
+Response more=await http.get(URL);
+try{
+  var json=jsonDecode(more.body);
+  MoreLikeThis moreLikeThis=MoreLikeThis.fromJson(json);
+  return moreLikeThis;
+}
+catch(e){
+  print(e);
+  throw e;
+}
 
+}
 
   ////////////////////////////////////////////////////////////
 
