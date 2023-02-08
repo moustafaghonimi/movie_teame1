@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../models/newReleases.dart';
+import '../../../models/newReleases.dart';
 
 class NewRelaseItems extends StatelessWidget {
   var imageHight;
@@ -24,7 +24,7 @@ class NewRelaseItems extends StatelessWidget {
               ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   child: Image.network(
-                    'https://image.tmdb.org/t/p/original${results.backdropPath!}',
+                    'https://image.tmdb.org/t/p/original${results.posterPath!}',
                     width: w * .26,
                     height: h * 0.17,
                     fit: BoxFit.cover,

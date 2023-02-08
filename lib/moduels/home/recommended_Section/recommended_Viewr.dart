@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:movie/moduels/home/recommended_Section/recommende_details.dart';
 
-import '../../core/colorApp.dart';
-import '../../models/newReleases.dart';
-import '../../shared/network/remote/api_Manger.dart';
-import 'new_relase_details.dart';
+import '../../../core/colorApp.dart';
+import '../../../models/TopReated.dart';
+import '../../../shared/network/remote/api_Manger.dart';
 
-class NewReleaseViewr extends StatefulWidget {
+
+class RecommendedViewr extends StatefulWidget {
 
   @override
-  State<NewReleaseViewr> createState() => _NewReleaseViewrState();
+  State<RecommendedViewr> createState() => _RecommendedViewrState();
 }
 
-class _NewReleaseViewrState extends State<NewReleaseViewr> {
+class _RecommendedViewrState extends State<RecommendedViewr> {
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
     return Container(
+      height: h*0.28,
+
       color: ColorApp().graycolor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,7 +27,7 @@ class _NewReleaseViewrState extends State<NewReleaseViewr> {
           Padding(
             padding: const EdgeInsets.all(4.0),
             child: Text(
-              '  New Releases',
+              '  Recommended',
               style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
@@ -32,9 +35,8 @@ class _NewReleaseViewrState extends State<NewReleaseViewr> {
               textAlign: TextAlign.start,
             ),
           ),
-
-          FutureBuilder<NewReleases>(
-            future: ApiManger().getNewRelases(),
+          FutureBuilder<TopReated>(
+            future: ApiManger().getTopReated(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
@@ -49,9 +51,9 @@ class _NewReleaseViewrState extends State<NewReleaseViewr> {
                       ),
                       Icon(Icons.signal_wifi_statusbar_connected_no_internet_4_rounded,color: Colors.white,size: 70,),
                       TextButton(
-                          onHover: (value) {
-                            return activate();
-                          },
+                        onHover: (value) {
+                          return activate();
+                        },
                           onPressed: () {
                             setState(() {});
                           },
@@ -61,24 +63,29 @@ class _NewReleaseViewrState extends State<NewReleaseViewr> {
                   ),
                 );
               }
+              // if (snapshot.data?.success == 'error') {
+              //   return Center(
+              //     child: Column(
+              //       children: [
+              //         Text(snapshot.data?. ?? 'style: TextStyle(color: Colors.black)'),
+              //         TextButton(onPressed: () {}, child: Text('Try Again')),
+              //       ],
+              //     ),
+              //   );
+              // }
               var results = snapshot.data?.results ?? [];
               return Container(
                 width: double.infinity,
-                // width: double.infinity,
-                height: h * 0.19,
+                height: h * 0.24,
                 child: ListView.builder(
-
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      return NewRelaseItems(h * 0.20,results[index]);
+                      return Recommended_Details(results[index]);
                     },
                     itemCount: results.length),
               );
             },
           ),
-
-
-
         ],
       ),
     );
