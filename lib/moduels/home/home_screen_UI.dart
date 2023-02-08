@@ -1,11 +1,16 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:image_card/image_card.dart';
-import 'package:movie/base.dart';
 import 'package:movie/core/colorApp.dart';
+import 'package:movie/models/newReleases.dart';
+import 'package:movie/models/topSide.dart';
 import 'package:movie/moduels/home/recommende_details.dart';
+import 'package:movie/moduels/home/recommended_Viewr.dart';
+import 'package:movie/moduels/home/topSide_Details.dart';
+import 'package:movie/moduels/home/topSide_Viewr.dart';
+import 'package:movie/shared/network/remote/api_Manger.dart';
 
-import 'home_screen_Navigator.dart';
-import 'home_screen_VM.dart';
+import '../../models/TopReated.dart';
+import 'newRelaseViewr.dart';
 import 'new_relase_details.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,14 +20,7 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends BaseView<HomeScreen, HomeScreenViewModel>
-    implements HomeNavigator {
-  @override
-  void initState() {
-    super.initState();
-    viewModel.navigator = this;
-  }
-
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
@@ -32,118 +30,215 @@ class _HomeScreenState extends BaseView<HomeScreen, HomeScreenViewModel>
       width: double.infinity,
       child: Column(
         children: [
-          Container(
-            height: h * .35,
-            child: Stack(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      'assets/images/1.jpeg',
-                      width: double.infinity,
-                      height: h * 0.25,
-                      fit: BoxFit.cover,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 115),
-                      child: Text(
-                        'Filme name',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 120.0),
-                      child: Text(
-                        '2018 PG-20-5',
-                        style: TextStyle(color: Colors.white, fontSize: 12),
-                      ),
-                    ),
-                  ],
-                ),
-                Center(child: Padding(
-                  padding: const EdgeInsets.only(bottom: 65.0),
-                  child: Icon(Icons.play_circle,color: Colors.white,size: 80,),
-                )),
+          ////////////////////////
+          // Top Side section
+          TopSideViewr(),
+          // FutureBuilder<TopSide>(
+          //   future: ApiManger().getTOPside(),
+          //   builder: (context, snapshot) {
+          //     if (snapshot.connectionState == ConnectionState.waiting) {
+          //       return Center(child: CircularProgressIndicator());
+          //     }
+          //     if (snapshot.hasError) {
+          //       return Center(
+          //         child: Column(
+          //           children: [
+          //             Text(
+          //               'Something Has Error',
+          //               style: TextStyle(color: Colors.black),
+          //             ),
+          //             TextButton(
+          //                 onPressed: () {
+          //                   setState(() {});
+          //                 },
+          //                 child: Text('Try Again')),
+          //           ],
+          //         ),
+          //       );
+          //     }
+          //     var results = snapshot.data?.results ?? [];
+          //     // print(results.length);
+          //     return   CarouselSlider.builder(itemCount:results.length , itemBuilder: (context, index, realIndex) {
+          //       return  TopSide_Details(results[index]);
+          //     }, options:
+          //     CarouselOptions(
+          //       height: h*0.35,
+          //       aspectRatio: 16/9,
+          //       viewportFraction: 0.9,
+          //       initialPage: 0,
+          //       enableInfiniteScroll: true,
+          //       reverse: false,
+          //       autoPlay: true,
+          //       autoPlayInterval: Duration(seconds: 3),
+          //       autoPlayAnimationDuration: Duration(milliseconds: 800),
+          //       autoPlayCurve: Curves.fastOutSlowIn,
+          //       enlargeCenterPage: true,
+          //       enlargeFactor: 0.3,
+          //
+          //       // onPageChanged: callbackFunction,
+          //       scrollDirection: Axis.horizontal,
+          //     )
+          //     );
+          //
+          //     //   Container(
+          //     //   width: double.infinity,
+          //     //   height: h * 0.35,
+          //     //   child: ListView.builder(
+          //     //     addAutomaticKeepAlives:true ,
+          //     //       scrollDirection: Axis.horizontal,
+          //     //       itemBuilder: (context, index) {
+          //     //         return TopSide_Details(results[index]);
+          //     //       },
+          //     //       itemCount: results.length),
+          //     // );
+          //   },
+          // ),
 
-                Padding(
-                  padding: const EdgeInsets.only(left:10,top: 80),
-                  child: NewRelaseItems( h * 0.22),
-                ),
-              ],
-            ),
-          ),
+          /////////////////////////////////////////////////////////
           // new releases
-          Container(
-            color: ColorApp().graycolor,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Text(
-                    '  New Releases',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-                Container(
-                  width: double.infinity,
-                  // width: double.infinity,
-                  height: h * 0.19,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return NewRelaseItems( h * 0.17);
-                      },
-                      itemCount: 10),
-                ),
-              ],
-            ),
-          ),
+          //////////////////////////////////////////
+
+          NewReleaseViewr(),
+          // new releases here
+          // Container(
+          //   color: ColorApp().graycolor,
+          //   child: Column(
+          //     crossAxisAlignment: CrossAxisAlignment.start,
+          //     children: [
+          //       Padding(
+          //         padding: const EdgeInsets.all(4.0),
+          //         child: Text(
+          //           '  New Releases',
+          //           style: TextStyle(
+          //               fontSize: 15,
+          //               fontWeight: FontWeight.bold,
+          //               color: Colors.white),
+          //           textAlign: TextAlign.start,
+          //         ),
+          //       ),
+          //
+          //       FutureBuilder<NewReleases>(
+          //         future: ApiManger().getNewRelases(),
+          //         builder: (context, snapshot) {
+          //           if (snapshot.connectionState == ConnectionState.waiting) {
+          //             return Center(child: CircularProgressIndicator());
+          //           }
+          //           if (snapshot.hasError) {
+          //             return Center(
+          //               child: Column(
+          //                 children: [
+          //                   Text(
+          //                     'Something Has Error',
+          //                     style: TextStyle(color: Colors.black),
+          //                   ),
+          //                   TextButton(
+          //                       onPressed: () {
+          //                         setState(() {});
+          //                       },
+          //                       child: Text('Try Again')),
+          //                 ],
+          //               ),
+          //             );
+          //           }
+          //           var results = snapshot.data?.results ?? [];
+          //           return Container(
+          //             width: double.infinity,
+          //             // width: double.infinity,
+          //             height: h * 0.19,
+          //             child: ListView.builder(
+          //
+          //                 scrollDirection: Axis.horizontal,
+          //                 itemBuilder: (context, index) {
+          //                   return NewRelaseItems(h * 0.20,results[index]);
+          //                 },
+          //                 itemCount: results.length),
+          //           );
+          //         },
+          //       ),
+          //
+          //
+          //
+          //     ],
+          //   ),
+          // ),
           //recommended
+          /////////////////////////////////////////////////////////
+
+
           SizedBox(
             height: h / 30,
           ),
-          Container(
-            color: ColorApp().graycolor,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Text(
-                    '  Recommended',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-                Container(
-                  width: double.infinity,
-                  height: h * 0.22,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Recommended_Details();
-                      },
-                      itemCount: 10),
-                ),
-              ],
-            ),
-          ),
+          /////////////////////////////////////////////////
+          //// recommended
+          RecommendedViewr(),
+          // Container(
+          //   color: ColorApp().graycolor,
+          //   child: Column(
+          //     crossAxisAlignment: CrossAxisAlignment.start,
+          //     children: [
+          //       Padding(
+          //         padding: const EdgeInsets.all(4.0),
+          //         child: Text(
+          //           '  Recommended',
+          //           style: TextStyle(
+          //               fontSize: 15,
+          //               fontWeight: FontWeight.bold,
+          //               color: Colors.white),
+          //           textAlign: TextAlign.start,
+          //         ),
+          //       ),
+          //       FutureBuilder<TopReated>(
+          //         future: ApiManger().getTopReated(),
+          //         builder: (context, snapshot) {
+          //           if (snapshot.connectionState == ConnectionState.waiting) {
+          //             return Center(child: CircularProgressIndicator());
+          //           }
+          //           if (snapshot.hasError) {
+          //             return Center(
+          //               child: Column(
+          //                 children: [
+          //                   Text(
+          //                     'Something Has Error',
+          //                     style: TextStyle(color: Colors.black),
+          //                   ),
+          //                   TextButton(
+          //                       onPressed: () {
+          //                         setState(() {});
+          //                       },
+          //                       child: Text('Try Again')),
+          //                 ],
+          //               ),
+          //             );
+          //           }
+          //           // if (snapshot.data?.success == 'error') {
+          //           //   return Center(
+          //           //     child: Column(
+          //           //       children: [
+          //           //         Text(snapshot.data?. ?? 'style: TextStyle(color: Colors.black)'),
+          //           //         TextButton(onPressed: () {}, child: Text('Try Again')),
+          //           //       ],
+          //           //     ),
+          //           //   );
+          //           // }
+          //           var results = snapshot.data?.results ?? [];
+          //           return Container(
+          //             width: double.infinity,
+          //             height: h * 0.24,
+          //             child: ListView.builder(
+          //                 scrollDirection: Axis.horizontal,
+          //                 itemBuilder: (context, index) {
+          //                   return Recommended_Details(results[index]);
+          //                 },
+          //                 itemCount: results.length),
+          //           );
+          //         },
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          /////////////////////////////////////////////////
         ],
       ),
     );
-  }
-
-  @override
-  HomeScreenViewModel initViewModel() {
-    return HomeScreenViewModel();
   }
 }

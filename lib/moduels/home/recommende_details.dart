@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:movie/models/TopReated.dart';
 
 import '../../core/colorApp.dart';
 
 class Recommended_Details extends StatelessWidget {
+  Results results;
+
+  Recommended_Details(this.results);
+
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
@@ -15,7 +20,6 @@ class Recommended_Details extends StatelessWidget {
           Row(
             children: [
               ClipRRect(
-
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   child: Container(
                     color: ColorApp().itemRecommendColor.withOpacity(.30),
@@ -24,13 +28,12 @@ class Recommended_Details extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          child: Image.asset(
-                            'assets/images/2.jpeg',
-                            width: w * .26,
-                            height: h * 0.14,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                            child: Image.network(
+                          'https://image.tmdb.org/t/p/original${results.backdropPath!}',
+                          width: w * .26,
+                          height: h * 0.14,
+                          fit: BoxFit.cover,
+                        )),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -39,27 +42,37 @@ class Recommended_Details extends StatelessWidget {
                               color: Colors.yellow,
                               size: 18,
                             ),
-                            Text('7.7',style: TextStyle(color: Colors.white),),
+                            Text(
+                              results.voteAverage.toString(),
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ],
                         ),
                         Padding(
                           padding: const EdgeInsets.all(2.0),
-                          child: Text(
-                            'Filme Name',
-                            style: TextStyle(fontSize: 12,color: Colors.white),
+                          child: Container(
+                            width: w * .26,
+                            height: h / 30,
+
+                            child: Text(
+                              results.title!,
+                              style: TextStyle(fontSize: 11, color: Colors.white),
+                            ),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 6.0),
-                          child: Text('2020 / 4 / 6',
-                              style: TextStyle(fontSize: 10)),
+                          child: Text(results.releaseDate??'',
+                              style: TextStyle(fontSize: 8,color: Colors.white70,wordSpacing: 5)),
                         ),
                       ],
                     ),
                   )),
             ],
           ),
-          Image.asset('assets/images/bookmark.png',)
+          Image.asset(
+            'assets/images/bookmark.png',
+          )
         ],
       ),
     );

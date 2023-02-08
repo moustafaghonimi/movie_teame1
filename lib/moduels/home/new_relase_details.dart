@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../../core/colorApp.dart';
+import '../../models/newReleases.dart';
 
 class NewRelaseItems extends StatelessWidget {
   var imageHight;
-  NewRelaseItems(this.imageHight);
+  Results results;
+
+
+
+  NewRelaseItems(this.imageHight,this.results);
+
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
@@ -18,19 +23,20 @@ class NewRelaseItems extends StatelessWidget {
             children: [
               ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
-                  child: Image.asset(
-                    'assets/images/1.jpeg',
-                    width: 90,
-                    height: imageHight,
+                  child: Image.network(
+                    'https://image.tmdb.org/t/p/original${results.backdropPath!}',
+                    width: w * .26,
+                    height: h * 0.17,
                     fit: BoxFit.cover,
-                  )),
+                  )
+              ),
             ],
           ),
-          Image.asset('assets/images/bookmark.png',)
-
+          Image.asset(
+            'assets/images/bookmark.png',
+          )
         ],
       ),
     );
   }
-
 }
