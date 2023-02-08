@@ -20,22 +20,24 @@ class _BottomNavigaterBar_home_screenState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: ColorApp().bottomBarSelectedIconColor,
-        onTap: (index) {
-          currentIndex=index;
-          setState(() {});
-        },
-        currentIndex: currentIndex,
-        items: [
-          bottomBaricon(Icon(Icons.home), 'HOME'),
-          bottomBaricon(Icon(Icons.search), 'SEARCH'),
-          bottomBar('assets/images/catogery_icon.png', 'BROWSE'),
-          bottomBaricon(Icon(Icons.collections_bookmark_outlined), 'WATCHLIST'),
-        ],
+    return SafeArea(
+      child: Scaffold(
+        bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: ColorApp().bottomBarSelectedIconColor,
+          onTap: (index) {
+            currentIndex=index;
+            setState(() {});
+          },
+          currentIndex: currentIndex,
+          items: [
+            bottomBaricon(Icon(Icons.home), 'HOME'),
+            bottomBaricon(Icon(Icons.search), 'SEARCH'),
+            bottomBar('assets/images/catogery_icon.png', 'BROWSE'),
+            bottomBaricon(Icon(Icons.collections_bookmark_outlined), 'WATCHLIST'),
+          ],
+        ),
+        body: Tabs[currentIndex],
       ),
-      body: Tabs[currentIndex],
     );
   }
 
