@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie/models/TopReated.dart';
 
-import '../../core/colorApp.dart';
+import '../../../core/colorApp.dart';
 
 class Recommended_Details extends StatelessWidget {
   Results results;
@@ -29,7 +29,7 @@ class Recommended_Details extends StatelessWidget {
                       children: [
                         Container(
                             child: Image.network(
-                          'https://image.tmdb.org/t/p/original${results.backdropPath!}',
+                          'https://image.tmdb.org/t/p/original${results.posterPath!}',
                           width: w * .26,
                           height: h * 0.14,
                           fit: BoxFit.cover,
