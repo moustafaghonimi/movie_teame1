@@ -32,6 +32,7 @@ class _MovieDetielsState extends State<MovieDetiels> {
       ),
       body: SingleChildScrollView(
         child: Container(
+          height: h,
           color: ColorApp().backgroundColor,
           width: double.infinity,
           child: Column(
