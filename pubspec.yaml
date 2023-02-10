@@ -35,6 +35,8 @@ dependencies:
   http: ^0.13.5
   flutter:
     sdk: flutter
+  cached_network_image: ^3.2.3
+  cached_network_image_builder: ^0.2.0
 
 
 

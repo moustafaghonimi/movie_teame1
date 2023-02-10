@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:movie/moduels/catogery/MovieViewScreen.dart';
 import 'package:movie/provider/myProvider.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         CatogeryScreen.routeName: (context) => CatogeryScreen(),
         WatchListScreen.routeName: (context) => WatchListScreen(),
         MovieDetiels.routeName: (context) => MovieDetiels(),
+        MoviesListScreen.routeName: (context) => MoviesListScreen()
       },
     );
   }
