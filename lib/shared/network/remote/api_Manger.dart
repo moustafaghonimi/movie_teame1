@@ -3,55 +3,13 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:movie/core/constant.dart';
 import 'package:http/http.dart' as http;
-import 'package:movie/models/catogry_models/MoviesResponse.dart';
-import 'package:movie/models/catogry_models/ReleaseModel.dart';
 import 'package:movie/models/moreLikeThis.dart';
-import 'package:movie/models/catogry_models/movie.dart';
 import 'package:movie/models/topSide.dart';
 
 import '../../../models/TopReated.dart';
 import '../../../models/newReleases.dart';
 
 class ApiManger {
-
-  static Future<Movies> getMoviesByList(int genreId) async {
-    var response = await http.get(
-      Uri.parse("https://$BASE/3/discover/movie?api_key=$APIHEY&adult=false&language=en-US&with_genres=$genreId"),
-    );
-    var movieResponse = Movies.fromJson(jsonDecode(response.body));
-    if (response.statusCode == 200) {
-      return movieResponse;
-    } else {
-      throw Exception('Failed to load album');
-    }
-  }
-  // static Future<MoviesResponse> getMovieView() async {
-  //   Uri Url = Uri.https(BASE,'/3/discover/movie',{'api_key':APIHEY},);
-  //   Response response= await http.get(Url);
-  //   try {
-  //     var json = jsonDecode(response.body);
-  //     MoviesResponse moviesResponse =MoviesResponse.fromJson(json);
-  //     return moviesResponse;
-  //   } catch (e) {
-  //     print('erorrrr:::$e');
-  //     throw e;
-  //   }
-  // }
-
-  
-  
-  static Future<ReleaseModel> getCategory() async {
-    Uri Url = Uri.https(BASE,'/3/genre/movie/list',{'api_key': APIHEY,});
-    Response response= await http.get(Url);
-    try {
-      var json = jsonDecode(response.body);
-      ReleaseModel releaseModel = ReleaseModel.fromJson(json);
-      return releaseModel;
-    } catch (e) {
-      print('erorrrr:::$e');
-      throw e;
-    }
-  }
 
 
   Future<NewReleases> getNewRelases( ) async {
@@ -85,8 +43,8 @@ class ApiManger {
       throw e;
     }
   }
-Future<MoreLikeThis> getMoreLikeThise(num movieId)async{
-    Uri URL=Uri.https(BASE,'/3/movie/${movieId.toString()}/similar',{
+Future<MoreLikeThis> getMoreLikeThise(num movie_id)async{
+    Uri URL=Uri.https(BASE,'/3/movie/${movie_id.toString()}/similar',{
       'api_key':APIHEY,
       // 'movie_id':Filme_ID,
     });
