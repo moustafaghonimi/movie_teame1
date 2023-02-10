@@ -1,8 +1,9 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/moduels/catogery/MovieViewScreen.dart';
 import 'package:movie/provider/myProvider.dart';
 import 'package:provider/provider.dart';
-
+import 'firebase_options.dart';
 import 'moduels/bottomNavigaterBar_home_screen/bottomNavigaterBar_home_screen.dart';
 import 'moduels/catogery/catogery_screen_UI.dart';
 import 'moduels/home/home_screen_UI.dart';
@@ -10,9 +11,15 @@ import 'moduels/movie_detiels_screen/movie_detiels.dart';
 import 'moduels/search/search_Screen_UI.dart';
 import 'moduels/watchList/watchList_Screen_UI.dart';
 
-void main() {
+void main()
+async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(ChangeNotifierProvider(create: (context) => Myprovider(),child: MyApp()));
 }
+
 
 class MyApp extends StatelessWidget {
   @override

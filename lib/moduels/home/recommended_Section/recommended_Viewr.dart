@@ -81,7 +81,9 @@ class _RecommendedViewrState extends State<RecommendedViewr> {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       return Recommended_Details(results[index]);
+
                     },
+
                     itemCount: results.length),
               );
             },
