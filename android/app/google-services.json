@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "949727746183",
+    "project_id": "movie-teme1",
+    "storage_bucket": "movie-teme1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:949727746183:android:96f651d251acd4efe5c022",
+        "android_client_info": {
+          "package_name": "com.example.movie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "949727746183-dv0o01envi9bfk5ea816buee1vmrh1so.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbs-9ChUM4YE2YeHNnWd0LF00rfSnKGgY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "949727746183-dv0o01envi9bfk5ea816buee1vmrh1so.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
