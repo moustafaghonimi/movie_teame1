@@ -3,7 +3,7 @@ class Movies {
   List<Results>? results;
   bool? success;
   String? message;
-
+//
   Movies.fromJson(Map<String, dynamic> json) {
     page = json["page"];
     success = json["success"];
