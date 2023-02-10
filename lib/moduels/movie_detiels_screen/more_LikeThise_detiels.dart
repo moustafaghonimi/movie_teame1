@@ -40,7 +40,7 @@ class MoreLikeThiseDetiels extends StatelessWidget {
                         children: [
                           Container(
                               child: Image.network(
-                                'https://image.tmdb.org/t/p/original${results.posterPath!}',
+                                'https://image.tmdb.org/t/p/original${results.posterPath??''}',
                                 width: w * .26,
                                 height: h * 0.14,
                                 fit: BoxFit.cover,
