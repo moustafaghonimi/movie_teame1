@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:movie/models/favorite.dart';
 
+
 CollectionReference<Favorite> getFavorite() {
   return FirebaseFirestore.instance.collection('Favorite').withConverter<Favorite>(
     fromFirestore: (snapshot, options) => Favorite.fromjson(snapshot.data()!),
@@ -23,3 +24,9 @@ Future<void> addFavoriteToFirestore(Favorite favorite) {
 
   return docRef.set(favorite);
 }
+
+// Stream<QuerySnapshot<Favorite>> getDataFromFirestore(num filem_id) {
+//   return getFavorite().id
+//       .where('filem_id',)
+//       .snapshots();
+// }
