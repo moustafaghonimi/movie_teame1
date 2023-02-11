@@ -4,12 +4,13 @@ import 'package:provider/provider.dart';
 
 import '../../../core/colorApp.dart';
 import '../../../provider/myProvider.dart';
+import '../../models/favorite.dart';
 import '../movie_detiels_screen/movie_detiels.dart';
 
-class SearchItems extends StatelessWidget {
-  Results results;
+class WatchList_Item extends StatelessWidget {
+  Favorite favorite;
 
-  SearchItems(this.results);
+  WatchList_Item(this.favorite);
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +30,10 @@ class SearchItems extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    provider.result_ID = results.id!;
+                    provider.result_ID = favorite.filem_id!;
                     print(provider.result_ID);
                     Navigator.pushNamed(context, MovieDetiels.routeName,
-                        arguments: results);
+                        );
                   },
                   child: ClipRRect(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -43,11 +44,11 @@ class SearchItems extends StatelessWidget {
                           children: [
                             Container(
                                 child: Image.network(
-                              'https://image.tmdb.org/t/p/original${results.backdropPath??''}',
-                              width: w * .40,
-                              height: h * 0.15,
-                              fit: BoxFit.cover,
-                            )),
+                                  'https://image.tmdb.org/t/p/original${favorite.backdropPath??''}',
+                                  width: w * .40,
+                                  height: h * 0.15,
+                                  fit: BoxFit.cover,
+                                )),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 12.0),
                               child: Column(
@@ -57,7 +58,7 @@ class SearchItems extends StatelessWidget {
                                   Container(
                                     width: w*0.40,
                                     child: Text(
-                                      results.title.toString(),
+                                      favorite.filmeName.toString(),
                                       style: TextStyle(color: Colors.white),
                                     ),
                                   ),
@@ -65,7 +66,7 @@ class SearchItems extends StatelessWidget {
                                     height: 6,
                                   ),
                                   Text(
-                                    results.releaseDate!,
+                                    favorite.releaseDate!,
                                     style: TextStyle(
                                         fontSize: 11, color: Colors.white70),
                                   ),
@@ -81,7 +82,7 @@ class SearchItems extends StatelessWidget {
                                         size: 18,
                                       ),
                                       Text(
-                                        results.voteAverage.toString(),
+                                        favorite.voteAverage.toString(),
                                         style: TextStyle(color: Colors.white),
                                       ),
                                     ],

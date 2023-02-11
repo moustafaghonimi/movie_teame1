@@ -34,7 +34,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   print(quary);
                 },
                 enableSuggestions: true,
-                style: TextStyle(color: Colors.white, fontSize: 20),
+                style: TextStyle(color: Colors.white, fontSize: 13),
                 autocorrect: true,
                 cursorColor: Colors.white,
                 showCursor: true,
@@ -61,7 +61,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   hintStyle: TextStyle(
                       color: Colors.white70,
                       fontWeight: FontWeight.w600,
-                      fontSize: 20),
+                      fontSize: 13),
                   fillColor: ColorApp().graycolor,
                   filled: true,
                 ),

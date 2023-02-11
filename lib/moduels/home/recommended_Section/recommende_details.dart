@@ -20,11 +20,15 @@ class Recommended_Details extends StatefulWidget {
 class _Recommended_DetailsState extends State<Recommended_Details> {
   @override
   Widget build(BuildContext context) {
-    bool isfavorite = false;
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
     var provider = Provider.of<Myprovider>(context);
-
+    Favorite favorite = Favorite(
+        filem_id: widget.results.id ?? 0,
+        filmeName: widget.results.title ?? "",
+        backdropPath: widget.results.backdropPath??'',
+        voteAverage: widget.results.voteAverage??0,
+        releaseDate: widget.results.releaseDate??'');
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Stack(
@@ -95,13 +99,19 @@ class _Recommended_DetailsState extends State<Recommended_Details> {
           ),
           InkWell(
             onTap: () {
-              isfavorite=true;
 
-              Favorite favorite = Favorite(
-                  filem_id: widget.results.id??0, isFavorite: isfavorite,filmeName: widget.results.title??"");
+              print(favorite.isFavorite);
+              if(favorite.isFavorite){
+                favorite.isFavorite = true;
+                provider.updateFavoriteToFirestore(favorite);
 
-              addFavoriteToFirestore(favorite);
-              print(isfavorite);
+              }
+              else if (!favorite.isFavorite) {
+                favorite.isFavorite = true;
+                addFavoriteToFirestore(favorite);
+                provider.updateFavoriteToFirestore(favorite);
+              }
+
               print(favorite.id);
               print(favorite.filem_id);
 
@@ -109,17 +119,16 @@ class _Recommended_DetailsState extends State<Recommended_Details> {
               print(favorite.filmeName);
 
               setState(() {
-                isfavorite=true;
+
               });
             },
-            child:  isfavorite== true
+            child: favorite.isFavorite
                 ? Image.asset(
                     'assets/images/bookmark_done.png',
                   )
                 : Image.asset(
                     'assets/images/bookmark.png',
                   ),
-
           )
         ],
       ),

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:movie/models/catogry_models/movie.dart';
+import 'package:provider/provider.dart';
 
 
 import '../../models/TopReated.dart';
+import '../../provider/myProvider.dart';
+import '../movie_detiels_screen/movie_detiels.dart';
 
 class MoviesListItem extends StatelessWidget {
   static const String routeName = 'movies list';
@@ -12,6 +15,8 @@ class MoviesListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<Myprovider>(context);
+
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 8),
       width: double.infinity,
@@ -19,16 +24,12 @@ class MoviesListItem extends StatelessWidget {
       child: Row(
         children: [
           InkWell(
-            onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (BuildContext context) => DetailsScreen(
-              //         moviesResult.elementAt(index),
-              //         index: index),
-              //   ),
-              // );
-            },
+            // onTap: () {
+            //   provider.result_ID = results.id!;
+            //   print(provider.result_ID);
+            //   Navigator.pushNamed(context, MovieDetiels.routeName,
+            //       arguments: results);
+            // },
             child: moviesResult.results?.elementAt(index).backdropPath == null
                 ? Container(
               height: MediaQuery.of(context).size.width * 0.3,
