@@ -35,6 +35,8 @@ class MoviesListScreen extends StatelessWidget {
                   style: TextStyle(color: Colors.white)),
             );
           }
+          var moviesResult = snapshot.data?.results ?? [];
+
           return ListView.separated(
             padding: EdgeInsets.symmetric(horizontal: 30),
             separatorBuilder: (context, index) {
@@ -45,10 +47,10 @@ class MoviesListScreen extends StatelessWidget {
                 endIndent: 0,
               );
             },
-            itemCount: snapshot.data!.results!.length,
+            itemCount: moviesResult.length,
 
             itemBuilder: (context, index) {
-              return MoviesListItem(snapshot.data!,index);
+              return MoviesListItem(moviesResult[index]);
             },);
         },),
     );

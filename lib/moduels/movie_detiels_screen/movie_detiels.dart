@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -42,12 +43,28 @@ class _MovieDetielsState extends State<MovieDetiels> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.network(
+                    CachedNetworkImage(
+                      imageUrl:
                       'https://image.tmdb.org/t/p/original${result.backdropPath!}',
                       width: double.infinity,
                       height: h * 0.24,
                       fit: BoxFit.cover,
+                      imageBuilder: (context, imageProvider) =>
+                          Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                      placeholder: (context, url) =>
+                          Center(child: CircularProgressIndicator()),
+                      errorWidget: (context, url, error) =>
+                          Icon(Icons.error),
                     ),
+
+
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
@@ -85,12 +102,27 @@ class _MovieDetielsState extends State<MovieDetiels> {
                             child: Container(
                               width: w * .28,
                               height: h * 0.20,
-                              child: Image.network(
+                              child:CachedNetworkImage(
+                                imageUrl:
                                 'https://image.tmdb.org/t/p/original${result.posterPath!}',
                                 width: w * .28,
                                 height: h * 0.22,
                                 fit: BoxFit.cover,
+                                imageBuilder: (context, imageProvider) =>
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: imageProvider,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                placeholder: (context, url) =>
+                                    Center(child: CircularProgressIndicator()),
+                                errorWidget: (context, url, error) =>
+                                    Icon(Icons.error),
                               ),
+
                             ),
                           ),
                           Image.asset('assets/images/bookmark.png')

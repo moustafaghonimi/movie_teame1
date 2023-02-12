@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/moduels/movie_detiels_screen/movie_detiels.dart';
@@ -32,12 +33,33 @@ class TopSide_Details extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.network(
+                CachedNetworkImage(
+                  imageUrl:
                   'https://image.tmdb.org/t/p/original${results.backdropPath!}',
-                  width: double.infinity,
-                  height: h * 0.24,
-                  fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: h * 0.24,
+                    fit: BoxFit.cover,
+                  imageBuilder: (context, imageProvider) =>
+                      Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: imageProvider,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                  placeholder: (context, url) =>
+                      Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) =>
+                      Icon(Icons.error),
                 ),
+
+                // Image.network(
+                //   'https://image.tmdb.org/t/p/original${results.backdropPath!}',
+                //   width: double.infinity,
+                //   height: h * 0.24,
+                //   fit: BoxFit.cover,
+                // ),
                 Padding(
                   padding: const EdgeInsets.only(left: 115),
                   child: Text(
@@ -78,12 +100,33 @@ class TopSide_Details extends StatelessWidget {
                   child: Container(
                     width: w * .26,
                     height: h * 0.18,
-                    child: Image.network(
+                    child: CachedNetworkImage(
+                      imageUrl:
                       'https://image.tmdb.org/t/p/original${results.posterPath!}',
-                      width: w * .26,
-                      height: h * 0.18,
-                      fit: BoxFit.cover,
+                        width: w * .26,
+                        height: h * 0.18,
+                      imageBuilder: (context, imageProvider) =>
+                          Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                      placeholder: (context, url) =>
+                          Center(child: CircularProgressIndicator()),
+                      errorWidget: (context, url, error) =>
+                          Icon(Icons.error),
                     ),
+
+
+                    // Image.network(
+                    //   'https://image.tmdb.org/t/p/original${results.posterPath!}',
+                    //   width: w * .26,
+                    //   height: h * 0.18,
+                    //   fit: BoxFit.cover,
+                    // ),
                   ),
                 ),
                 Image.asset('assets/images/bookmark.png')

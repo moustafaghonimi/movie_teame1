@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/models/TopReated.dart';
 import 'package:provider/provider.dart';
@@ -42,12 +43,31 @@ class SearchItems extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                                child: Image.network(
-                              'https://image.tmdb.org/t/p/original${results.backdropPath??''}',
-                              width: w * .40,
-                              height: h * 0.15,
-                              fit: BoxFit.cover,
-                            )),
+                                child:
+                                CachedNetworkImage(
+                                  imageUrl:
+                                  'https://image.tmdb.org/t/p/original${results.backdropPath??''}',
+                                  width: w * .40,
+                                  height: h * 0.15,
+                                  fit: BoxFit.cover,
+
+                                  imageBuilder: (context, imageProvider) =>
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: imageProvider,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                  placeholder: (context, url) =>
+                                      Center(child: CircularProgressIndicator()),
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
+                                ),
+
+
+                            ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 12.0),
                               child: Column(

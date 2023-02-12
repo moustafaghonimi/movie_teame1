@@ -18,21 +18,26 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
-    return Container(
-      color: ColorApp().backgroundColor,
-      width: double.infinity,
-      child: Column(
-        children: [
-          // Top Side section
-          TopSideViewr(),
-          // new Release
-          NewReleaseViewr(),
-          SizedBox(
-            height: h / 45,
+    return Scaffold(
+      backgroundColor: ColorApp().backgroundColor,
+      body: SingleChildScrollView(
+        child: Container(
+          color: ColorApp().backgroundColor,
+          width: double.infinity,
+          child: Column(
+            children: [
+              // Top Side section
+              TopSideViewr(),
+              // new Release
+              NewReleaseViewr(),
+              SizedBox(
+                height: h / 45,
+              ),
+              //// recommended
+              RecommendedViewr(),
+            ],
           ),
-          //// recommended
-          RecommendedViewr(),
-        ],
+        ),
       ),
     );
   }
