@@ -10,11 +10,7 @@ CollectionReference<Favorite> getFavorite() {
   );
 }
 
-// CollectionReference<Favorite>getFavorite(){
-//   return FirebaseFirestore.instance.collection('Favorite').withConverter<Favorite>
-//     (fromFirestore: (snapshot, options) => Favorite.fromJson(snapshot.data()!),
-//       toFirestore: (value, options) => value.tojson(),);
-// }
+
 
 Future<void> addFavoriteToFirestore(Favorite favorite) {
   var collection = getFavorite();
@@ -25,8 +21,14 @@ Future<void> addFavoriteToFirestore(Favorite favorite) {
   return docRef.set(favorite);
 }
 
-// Stream<QuerySnapshot<Favorite>> getDataFromFirestore(num filem_id) {
-//   return getFavorite().id
-//       .where('filem_id',)
-//       .snapshots();
-// }
+
+
+Stream<QuerySnapshot<Favorite>> getDataFromFirestore() {
+  return getFavorite()
+      .where('isFavorite',
+      isEqualTo: true)
+      .snapshots();
+}
+Future<void> deleteItemFromFireStore(String id){
+  return getFavorite().doc(id).delete();
+}

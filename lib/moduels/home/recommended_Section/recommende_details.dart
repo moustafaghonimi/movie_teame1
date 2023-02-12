@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/models/TopReated.dart';
 import 'package:movie/models/favorite.dart';
@@ -26,9 +27,10 @@ class _Recommended_DetailsState extends State<Recommended_Details> {
     Favorite favorite = Favorite(
         filem_id: widget.results.id ?? 0,
         filmeName: widget.results.title ?? "",
-        backdropPath: widget.results.backdropPath??'',
-        voteAverage: widget.results.voteAverage??0,
-        releaseDate: widget.results.releaseDate??'');
+        backdropPath: widget.results.backdropPath ?? '',
+        voteAverage: widget.results.voteAverage ?? 0,
+        releaseDate: widget.results.releaseDate ?? '', isFavorite: true);
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Stack(
@@ -51,12 +53,27 @@ class _Recommended_DetailsState extends State<Recommended_Details> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                              child: Image.network(
-                            'https://image.tmdb.org/t/p/original${widget.results.posterPath!}',
-                            width: w * .26,
-                            height: h * 0.14,
-                            fit: BoxFit.cover,
-                          )),
+                            child: CachedNetworkImage(
+                              imageUrl:
+                                  'https://image.tmdb.org/t/p/original${widget.results.posterPath!}',
+                              width: w * .26,
+                              height: h * 0.14,
+                              imageBuilder: (context, imageProvider) =>
+                                  Container(
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: imageProvider,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              placeholder: (context, url) =>
+                                  Center(child: CircularProgressIndicator()),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
+                            ),
+
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -98,29 +115,13 @@ class _Recommended_DetailsState extends State<Recommended_Details> {
             ],
           ),
           InkWell(
+
             onTap: () {
+              favorite.isFavorite=true;
+              addFavoriteToFirestore(favorite);
 
-              print(favorite.isFavorite);
-              if(favorite.isFavorite){
-                favorite.isFavorite = true;
-                provider.updateFavoriteToFirestore(favorite);
 
-              }
-              else if (!favorite.isFavorite) {
-                favorite.isFavorite = true;
-                addFavoriteToFirestore(favorite);
-                provider.updateFavoriteToFirestore(favorite);
-              }
 
-              print(favorite.id);
-              print(favorite.filem_id);
-
-              print(favorite.isFavorite);
-              print(favorite.filmeName);
-
-              setState(() {
-
-              });
             },
             child: favorite.isFavorite
                 ? Image.asset(

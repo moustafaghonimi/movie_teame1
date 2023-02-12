@@ -9,9 +9,8 @@ import '../movie_detiels_screen/movie_detiels.dart';
 
 class MoviesListItem extends StatelessWidget {
   static const String routeName = 'movies list';
-  Movies moviesResult;
- int index ;
-  MoviesListItem(this.moviesResult,this.index);
+  Results moviesResult;
+  MoviesListItem(this.moviesResult);
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +23,13 @@ class MoviesListItem extends StatelessWidget {
       child: Row(
         children: [
           InkWell(
-            // onTap: () {
-            //   provider.result_ID = results.id!;
-            //   print(provider.result_ID);
-            //   Navigator.pushNamed(context, MovieDetiels.routeName,
-            //       arguments: results);
-            // },
-            child: moviesResult.results?.elementAt(index).backdropPath == null
+            onTap: () {
+              provider.result_ID = moviesResult.id??0;
+              print(provider.result_ID);
+              Navigator.pushNamed(context, MovieDetiels.routeName,
+                  arguments: moviesResult);
+            },
+            child: moviesResult.backdropPath == null
                 ? Container(
               height: MediaQuery.of(context).size.width * 0.3,
               width: MediaQuery.of(context).size.height * 0.22,
@@ -44,7 +43,7 @@ class MoviesListItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(5),
               child: Image.network(
                 'https://image.tmdb.org/t/p/w500'
-                    '${moviesResult.results?.elementAt(index).backdropPath}',
+                    '${moviesResult.backdropPath}',
                 fit: BoxFit.cover,
                 width: 150,
                 height: 100,
@@ -58,7 +57,7 @@ class MoviesListItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  moviesResult.results?.elementAt(index).title ?? '',
+                  moviesResult.title ?? '',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -68,7 +67,7 @@ class MoviesListItem extends StatelessWidget {
                 ),
                 SizedBox(height: 5),
                 Text(
-                  moviesResult.results?.elementAt(index).releaseDate ?? '',
+                  moviesResult.releaseDate ?? '',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -78,7 +77,7 @@ class MoviesListItem extends StatelessWidget {
                 ),
                 SizedBox(height: 5),
                 Text(
-                  moviesResult.results?.elementAt(index).overview ?? '',
+                  moviesResult.overview ?? '',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
