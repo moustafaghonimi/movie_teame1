@@ -29,6 +29,7 @@ Stream<QuerySnapshot<Favorite>> getDataFromFirestore() {
       isEqualTo: true)
       .snapshots();
 }
+
 Future<void> deleteItemFromFireStore(String id){
   return getFavorite().doc(id).delete();
 }

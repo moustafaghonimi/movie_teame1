@@ -10,6 +10,7 @@ import 'package:movie/models/searchModel.dart';
 import 'package:movie/models/topSide.dart';
 
 import '../../../models/TopReated.dart';
+import '../../../models/videoResults.dart';
 import '../../../models/newReleases.dart';
 
 class ApiManger {
@@ -116,6 +117,21 @@ class ApiManger {
       var json = jsonDecode(reated.body);
       TopReated topReated = TopReated.fromJson(json);
       return topReated;
+    } catch (e) {
+      print('erorrrr:::$e');
+      throw e;
+    }
+  }
+
+  Future<VideoResults> getVideoTriler(num movie_id) async {
+    Uri URL=Uri.https(BASE,'/3/movie/${movie_id.toString()}/videos', {
+      'api_key': APIHEY,
+    });
+    Response video = await http.get(URL);
+    try {
+      var json = jsonDecode(video.body);
+      VideoResults videoResults = VideoResults.fromJson(json);
+      return videoResults;
     } catch (e) {
       print('erorrrr:::$e');
       throw e;

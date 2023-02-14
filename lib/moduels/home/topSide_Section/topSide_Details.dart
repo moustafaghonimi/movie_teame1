@@ -54,12 +54,7 @@ class TopSide_Details extends StatelessWidget {
                       Icon(Icons.error),
                 ),
 
-                // Image.network(
-                //   'https://image.tmdb.org/t/p/original${results.backdropPath!}',
-                //   width: double.infinity,
-                //   height: h * 0.24,
-                //   fit: BoxFit.cover,
-                // ),
+
                 Padding(
                   padding: const EdgeInsets.only(left: 115),
                   child: Text(
@@ -121,15 +116,8 @@ class TopSide_Details extends StatelessWidget {
                     ),
 
 
-                    // Image.network(
-                    //   'https://image.tmdb.org/t/p/original${results.posterPath!}',
-                    //   width: w * .26,
-                    //   height: h * 0.18,
-                    //   fit: BoxFit.cover,
-                    // ),
                   ),
                 ),
-                Image.asset('assets/images/bookmark.png')
               ],
             ),
           ),

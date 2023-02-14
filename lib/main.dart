@@ -8,6 +8,7 @@ import 'moduels/bottomNavigaterBar_home_screen/bottomNavigaterBar_home_screen.da
 import 'moduels/catogery/catogery_screen_UI.dart';
 import 'moduels/home/home_screen_UI.dart';
 import 'moduels/movie_detiels_screen/movie_detiels.dart';
+import 'moduels/movie_detiels_screen/triler_video/youtube.dart';
 import 'moduels/search/search_Screen_UI.dart';
 import 'moduels/watchList/watchList_Screen_UI.dart';
 
@@ -35,7 +36,8 @@ class MyApp extends StatelessWidget {
         CatogeryScreen.routeName: (context) => CatogeryScreen(),
         WatchListScreen.routeName: (context) => WatchListScreen(),
         MovieDetiels.routeName: (context) => MovieDetiels(),
-        MoviesListScreen.routeName: (context) => MoviesListScreen()
+        MoviesListScreen.routeName: (context) => MoviesListScreen(),
+        YoutubePlayerTriler.routeName: (context) => YoutubePlayerTriler()
       },
     );
   }

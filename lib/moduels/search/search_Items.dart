@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:movie/models/TopReated.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/colorApp.dart';
 import '../../../provider/myProvider.dart';
 import '../movie_detiels_screen/movie_detiels.dart';
 
@@ -45,28 +44,25 @@ class SearchItems extends StatelessWidget {
                             Container(
                                 child:
                                 CachedNetworkImage(
-                                  imageUrl:
-                                  'https://image.tmdb.org/t/p/original${results.backdropPath??''}',
-                                  width: w * .40,
-                                  height: h * 0.15,
-                                  fit: BoxFit.cover,
-
-                                  imageBuilder: (context, imageProvider) =>
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            image: imageProvider,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                  placeholder: (context, url) =>
-                                      Center(child: CircularProgressIndicator()),
-                                  errorWidget: (context, url, error) =>
-                                      Icon(Icons.error),
+                                imageUrl:
+                                    'https://image.tmdb.org/t/p/original${results.backdropPath ?? ''}',
+                                width: w * .40,
+                                height: h * 0.15,
+                                fit: BoxFit.cover,
+                                imageBuilder: (context, imageProvider) =>
+                                    Container(
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: imageProvider,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                                 ),
-
-
+                                placeholder: (context, url) =>
+                                    Center(child: CircularProgressIndicator()),
+                                errorWidget: (context, url, error) =>
+                                    Icon(Icons.error),
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 12.0),

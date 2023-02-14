@@ -24,12 +24,8 @@ class _Recommended_DetailsState extends State<Recommended_Details> {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
     var provider = Provider.of<Myprovider>(context);
-    Favorite favorite = Favorite(
-        filem_id: widget.results.id ?? 0,
-        filmeName: widget.results.title ?? "",
-        backdropPath: widget.results.backdropPath ?? '',
-        voteAverage: widget.results.voteAverage ?? 0,
-        releaseDate: widget.results.releaseDate ?? '', isFavorite: true);
+
+
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -114,23 +110,6 @@ class _Recommended_DetailsState extends State<Recommended_Details> {
               ),
             ],
           ),
-          InkWell(
-
-            onTap: () {
-              favorite.isFavorite=true;
-              addFavoriteToFirestore(favorite);
-
-
-
-            },
-            child: favorite.isFavorite
-                ? Image.asset(
-                    'assets/images/bookmark_done.png',
-                  )
-                : Image.asset(
-                    'assets/images/bookmark.png',
-                  ),
-          )
         ],
       ),
     );

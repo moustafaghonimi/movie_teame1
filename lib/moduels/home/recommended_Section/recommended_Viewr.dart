@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:movie/moduels/home/recommended_Section/recommende_details.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/colorApp.dart';
 import '../../../models/TopReated.dart';
+import '../../../provider/myProvider.dart';
 import '../../../shared/network/remote/api_Manger.dart';
+import '../../../shared/network/remote/firestore_utiles.dart';
 
 
 class RecommendedViewr extends StatefulWidget {
@@ -15,6 +18,8 @@ class RecommendedViewr extends StatefulWidget {
 class _RecommendedViewrState extends State<RecommendedViewr> {
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<Myprovider>(context);
+
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
     return Container(
@@ -63,16 +68,6 @@ class _RecommendedViewrState extends State<RecommendedViewr> {
                   ),
                 );
               }
-              // if (snapshot.data?.success == 'error') {
-              //   return Center(
-              //     child: Column(
-              //       children: [
-              //         Text(snapshot.data?. ?? 'style: TextStyle(color: Colors.black)'),
-              //         TextButton(onPressed: () {}, child: Text('Try Again')),
-              //       ],
-              //     ),
-              //   );
-              // }
               var results = snapshot.data?.results ?? [];
               return Container(
                 width: double.infinity,
