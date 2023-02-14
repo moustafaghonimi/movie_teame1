@@ -11,7 +11,7 @@ class Favorite {
 
   Favorite({
     this.id = '',
-     this.isFavorite=false ,
+     required this.isFavorite ,
     required this.filem_id,
     required this.filmeName,
     required this.backdropPath,

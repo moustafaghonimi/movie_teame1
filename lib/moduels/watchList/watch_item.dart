@@ -36,12 +36,12 @@ class _WatchList_ItemState extends State<WatchList_Item> {
             Row(
               children: [
                 InkWell(
-                  onTap: () {
-                    provider.result_ID = widget.favorite.filem_id!;
-                    print(provider.result_ID);
-                    Navigator.pushNamed(context, MovieDetiels.routeName,
-                        );
-                  },
+                  // onTap: () {
+                  //   provider.result_ID = widget.favorite.filem_id??0;
+                  //   print(provider.result_ID);
+                  //   Navigator.pushNamed(context, MovieDetiels.routeName,
+                  //       );
+                  // },
                   child: Stack(
                     children: [
                       ClipRRect(
@@ -97,7 +97,7 @@ class _WatchList_ItemState extends State<WatchList_Item> {
                                         height: 6,
                                       ),
                                       Text(
-                                        widget.favorite.releaseDate!,
+                                        widget.favorite.releaseDate??'',
                                         style: TextStyle(
                                             fontSize: 11, color: Colors.white70),
                                       ),

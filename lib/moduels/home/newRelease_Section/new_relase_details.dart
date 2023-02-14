@@ -20,44 +20,37 @@ class NewRelaseItems extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.all(6.0),
-      child: Stack(
+      child: Row(
         children: [
-          Row(
-            children: [
-              InkWell(
-                onTap: () {
-                  provider.result_ID = results.id!;
-                  print(provider.result_ID);
-                  Navigator.pushNamed(context, MovieDetiels.routeName,
-                      arguments: results);
-                },
-                child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  child: CachedNetworkImage(
-                    imageUrl:
-                        'https://image.tmdb.org/t/p/original${results.posterPath!}',
-                    width: w * .26,
-                    height: h * 0.17,
-                    fit: BoxFit.cover,
-                    imageBuilder: (context, imageProvider) => Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+          InkWell(
+            onTap: () {
+              provider.result_ID = results.id!;
+              print(provider.result_ID);
+              Navigator.pushNamed(context, MovieDetiels.routeName,
+                  arguments: results);
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              child: CachedNetworkImage(
+                imageUrl:
+                    'https://image.tmdb.org/t/p/original${results.posterPath!}',
+                width: w * .26,
+                height: h * 0.17,
+                fit: BoxFit.cover,
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
                     ),
-                    placeholder: (context, url) => Center(child: CircularProgressIndicator()),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
                   ),
-
                 ),
+                placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+                errorWidget: (context, url, error) => Icon(Icons.error),
               ),
-            ],
+
+            ),
           ),
-          Image.asset(
-            'assets/images/bookmark.png',
-          )
         ],
       ),
     );

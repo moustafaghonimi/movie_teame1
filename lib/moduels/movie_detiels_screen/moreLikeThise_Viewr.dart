@@ -66,16 +66,7 @@ class _MoreLikeThis_ViewrState extends State<MoreLikeThis_Viewr> {
                   ),
                 );
               }
-              // if (snapshot.data?.success == 'error') {
-              //   return Center(
-              //     child: Column(
-              //       children: [
-              //         Text(snapshot.data?. ?? 'style: TextStyle(color: Colors.black)'),
-              //         TextButton(onPressed: () {}, child: Text('Try Again')),
-              //       ],
-              //     ),
-              //   );
-              // }
+
               var results = snapshot.data?.results ?? [];
               return Container(
                 width: double.infinity,

@@ -4,8 +4,9 @@ import 'package:provider/provider.dart';
 
 import '../../../core/colorApp.dart';
 import '../../models/TopReated.dart';
-import '../../models/moreLikeThis.dart';
+
 import '../../provider/myProvider.dart';
+
 import 'movie_detiels.dart';
 
 class MoreLikeThiseDetiels extends StatelessWidget {
@@ -28,6 +29,7 @@ class MoreLikeThiseDetiels extends StatelessWidget {
               InkWell(
                 onTap: () {
                   provider.result_ID = results.id!;
+
                   print(provider.result_ID);
                   Navigator.pushNamed(context, MovieDetiels.routeName,
                       arguments: results);
@@ -102,9 +104,6 @@ class MoreLikeThiseDetiels extends StatelessWidget {
               ),
             ],
           ),
-          Image.asset(
-            'assets/images/bookmark.png',
-          )
         ],
       ),
     );
