@@ -5,6 +5,7 @@ import 'package:movie/moduels/home/topSide_Section/topSide_Details.dart';
 import 'package:movie/shared/network/remote/api_Manger.dart';
 
 import '../../models/catogry_models/ReleaseModel.dart';
+import '../../repositorie/data_source/remote.dart';
 
 class CatogeryScreen extends StatefulWidget {
   static const String routeName = 'cat';
@@ -16,6 +17,7 @@ class CatogeryScreen extends StatefulWidget {
 class _CatogeryScreenState extends State<CatogeryScreen> {
   @override
   Widget build(BuildContext context) {
+    Repo repo=Repo(baseRepositorie: Remote());
     return Scaffold(
       backgroundColor: ColorApp().backgroundColor,
       appBar: AppBar(
@@ -30,7 +32,7 @@ class _CatogeryScreenState extends State<CatogeryScreen> {
       body: Container(
 
         child: FutureBuilder<ReleaseModel>(
-          future: ApiManger.getCategory(),
+          future: repo.baseRepositorie?.getCategory(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());

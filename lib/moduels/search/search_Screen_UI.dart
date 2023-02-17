@@ -4,6 +4,7 @@ import 'package:movie/moduels/search/search_Items.dart';
 import 'package:movie/shared/network/remote/api_Manger.dart';
 
 import '../../core/colorApp.dart';
+import '../../repositorie/data_source/remote.dart';
 
 class SearchScreen extends StatefulWidget {
   static const String routeName = 'search';
@@ -72,26 +73,27 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             quary == ''
                 ? Padding(
-                  padding: const EdgeInsets.only(top: 150.0),
-                  child: Container(
-                      width: double.infinity,
-                      child: Column(
-                        children: [
-                          Icon(
-                            Icons.local_movies,
-                            size: 120,
-                            color: Colors.white60,
-                          ),
-                          SizedBox(
-                            height: 6,
-                          ),
-                          Text(
-                            'No Movies Found',
-                            style: TextStyle(fontSize: 18, color: Colors.white60),
-                          )
-                        ],
-                      )),
-                )
+                    padding: const EdgeInsets.only(top: 150.0),
+                    child: Container(
+                        width: double.infinity,
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.local_movies,
+                              size: 120,
+                              color: Colors.white60,
+                            ),
+                            SizedBox(
+                              height: 6,
+                            ),
+                            Text(
+                              'No Movies Found',
+                              style: TextStyle(
+                                  fontSize: 18, color: Colors.white60),
+                            )
+                          ],
+                        )),
+                  )
                 : Expanded(
                     child: ListView.builder(
                       itemBuilder: (context, index) {
@@ -106,9 +108,10 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
+  Repo repo = Repo(baseRepositorie: Remote());
+
   List<Results> search() {
-    ApiManger()
-        .getSearch(quary)
+    repo.baseRepositorie?.getSearch(quary)
         .then((searchResponces) => {searchList = searchResponces.results ?? []})
         .catchError(
       (error) {

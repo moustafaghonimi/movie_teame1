@@ -5,6 +5,7 @@ import 'package:movie/models/catogry_models/movie.dart';
 import 'package:movie/moduels/catogery/MovieViewScreen.dart';
 import 'package:movie/shared/network/remote/api_Manger.dart';
 
+import '../../repositorie/data_source/remote.dart';
 import '../../shared/styles/colors.dart';
 
 class CategoryItem extends StatelessWidget {
@@ -14,6 +15,7 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Repo repo=Repo(baseRepositorie: Remote());
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, MoviesListScreen.routeName, arguments: genres);
@@ -22,7 +24,7 @@ class CategoryItem extends StatelessWidget {
       child: Stack(
         children: [
           FutureBuilder<Movies>(
-            future: ApiManger.getMoviesByList(genres.id!),
+            future: repo.baseRepositorie?.getMoviesByList(genres.id!),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(

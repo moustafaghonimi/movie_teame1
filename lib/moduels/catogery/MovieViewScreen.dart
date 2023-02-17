@@ -6,11 +6,14 @@ import 'package:movie/models/catogry_models/movie.dart';
 import 'package:movie/moduels/catogery/MovieViewItem.dart';
 import 'package:movie/shared/network/remote/api_Manger.dart';
 
+import '../../repositorie/data_source/remote.dart';
+
 class MoviesListScreen extends StatelessWidget {
   static const String routeName = 'movies list';
 
   @override
   Widget build(BuildContext context) {
+    Repo repo=Repo(baseRepositorie: Remote());
     var genre = ModalRoute.of(context)?.settings.arguments as Genres;
     return Scaffold(
       appBar: AppBar(
@@ -24,7 +27,7 @@ class MoviesListScreen extends StatelessWidget {
       ),
       backgroundColor: ColorApp().backgroundColor,
       body: FutureBuilder<Movies>(
-        future: ApiManger.getMoviesByList(genre.id!),
+        future: repo.baseRepositorie?.getMoviesByList(genre.id!),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());

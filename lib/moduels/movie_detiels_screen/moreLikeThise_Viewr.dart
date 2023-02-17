@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../core/colorApp.dart';
 import '../../models/moreLikeThis.dart';
 import '../../provider/myProvider.dart';
+import '../../repositorie/data_source/remote.dart';
 import '../../shared/network/remote/api_Manger.dart';
 import 'more_LikeThise_detiels.dart';
 
@@ -17,9 +18,9 @@ class MoreLikeThis_Viewr extends StatefulWidget {
 class _MoreLikeThis_ViewrState extends State<MoreLikeThis_Viewr> {
   @override
   Widget build(BuildContext context) {
+
+    Repo repo=Repo(baseRepositorie: Remote());
     var provider=Provider.of<Myprovider>(context);
-
-
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
     return Container(
@@ -41,7 +42,7 @@ class _MoreLikeThis_ViewrState extends State<MoreLikeThis_Viewr> {
             ),
           ),
           FutureBuilder<MoreLikeThis>(
-            future: ApiManger().getMoreLikeThise(provider.result_ID),
+            future: repo.baseRepositorie?.getMoreLikeThise(provider.result_ID),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
