@@ -4,6 +4,7 @@ import 'package:movie/moduels/home/topSide_Section/topSide_Details.dart';
 
 import '../../../core/colorApp.dart';
 import '../../../models/topSide.dart';
+import '../../../repositorie/data_source/remote.dart';
 import '../../../shared/network/remote/api_Manger.dart';
 
 class TopSideViewr extends StatefulWidget {
@@ -14,13 +15,14 @@ class TopSideViewr extends StatefulWidget {
 class _TopSideViewrState extends State<TopSideViewr> {
   @override
   Widget build(BuildContext context) {
+    Repo repo=Repo(baseRepositorie: Remote());
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
     return Container(
       height: h*0.35,
       width: double.infinity,
       child: FutureBuilder<TopSide>(
-        future: ApiManger().getTOPside(),
+        future: repo.baseRepositorie?.getTOPside(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());

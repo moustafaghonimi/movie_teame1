@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/colorApp.dart';
 import '../../../models/newReleases.dart';
+import '../../../repositorie/data_source/remote.dart';
 import '../../../shared/network/remote/api_Manger.dart';
 import 'new_relase_details.dart';
 
@@ -14,6 +15,7 @@ class NewReleaseViewr extends StatefulWidget {
 class _NewReleaseViewrState extends State<NewReleaseViewr> {
   @override
   Widget build(BuildContext context) {
+    Repo repo=Repo(baseRepositorie: Remote());
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
@@ -36,7 +38,7 @@ class _NewReleaseViewrState extends State<NewReleaseViewr> {
             ),
 
             FutureBuilder<NewReleases>(
-              future: ApiManger().getNewRelases(),
+              future: repo.baseRepositorie?.getNewRelases(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../core/colorApp.dart';
 import '../../../models/TopReated.dart';
 import '../../../provider/myProvider.dart';
+import '../../../repositorie/data_source/remote.dart';
 import '../../../shared/network/remote/api_Manger.dart';
 import '../../../shared/network/remote/firestore_utiles.dart';
 
@@ -22,6 +23,7 @@ class _RecommendedViewrState extends State<RecommendedViewr> {
 
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
+    Repo repo=Repo(baseRepositorie: Remote());
     return Container(
       height: h*0.28,
 
@@ -41,7 +43,7 @@ class _RecommendedViewrState extends State<RecommendedViewr> {
             ),
           ),
           FutureBuilder<TopReated>(
-            future: ApiManger().getTopReated(),
+            future: repo.baseRepositorie?.getTopReated(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
